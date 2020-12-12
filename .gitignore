@@ -1,0 +1,5 @@
+# ignore Mac system files
+.DS_store
+
+# ignore documents folder
+/documents
