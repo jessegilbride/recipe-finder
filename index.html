@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width initial-scale=1">
+	<meta name="description" content="">
+	<title>Page Title</title>
+	<!-- CSS reset -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+	<!-- custom styles -->
+	<link href="styles.css" rel="stylesheet">
+	<!-- cloud-hosted fonts -->
+	<link href="" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="food-icons"></div>
+    <h1>Recipe Finder</h1>
+  </header>
+	<main>
+    <section id="js-search-screen">
+      <p class="app-instruction">xyz</p>
+      <form>
+        <fieldset>
+          <input type="text" id="js-search-input" placeholder="Enter an ingredient...">
+          <button class="btn btn-search">Search</button>
+        </fieldset>
+        <div id="js-error-message-box">
+          <p></p>
+        </div>
+      </form>
+    </section>
+    <section id="js-results-screen"></section>
+    <section id="js-recipe-screen"></section>
+  </main>
+	
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script src="app.js">
+	</script>
+</body>
+
+</html>
