@@ -1,24 +1,82 @@
 'use strict';
 
 const store = {
-  errorIngredientNotFound: "Sorry, we can't find a recipe based on your search. Please try again.",
-  errorNoServerResonse: "Seems like we're having trouble contacting the service that provides recipes. Check your internet connection and try again. Thanks!",
-  errorPointsQuotaExceeded: "Unfortunately you've reached the daily quota of allowed searches. Please come back tomorrow.",
   displaySearch: true,
   displayResults: false,
   displayRecipe: false
 };
 
-/********** TEMPLATE GENERATION **********/
-// >> generators create dynamic HTML <<
+const ruhRohShaggy = {
+  noServerResonse: "Seems like we're having trouble contacting the service that provides recipes. Check your internet connection and try again. Thanks!",
+  pointsQuotaExceeded: "Unfortunately you've reached the daily quota of allowed searches. Please come back tomorrow.",
+  ingredientNotFound: "Sorry, we can't find a recipe based on your search. Please try again."
+}
 
+const apiKey = `46e759e032d04fc496f2345a2a35256c`;
 
-/********** API CALLS **********/
+/* ******************************************************************************
+ * TEMPLATE GENERATION 
+ * ...generators create dynamic HTML
+ * ******************************************************************************/
 
-getResults(ingredient) {}
+/* ******************************************************************************
+ * DISPLAY FUNCTIONS
+ * ...put HTML and API data into the DOM
+ * ******************************************************************************/
 
-/********** APP RENDERING **********/
-// >> render says which screen to show <<
+ function displaySearchResults(responseJSON) {}
+
+/* ******************************************************************************
+ * API CALLS 
+ * ...get the data, send to display functions
+ * ******************************************************************************/
+
+/* function removeParamWhitespace(params) {
+  const noWhiteSpaceVar = params["keyName"].replace(/\s/g,''); // strip all whitespace
+  params["keyName"] = noWhiteSpaceVar;
+  return params;
+} */
+
+function formatQueryString(params) {;
+  // const paramsWithoutWhitespace = removeParamWhitespace(params);
+  const queryItems = Object.keys(params)
+    .map(key => `${encodeURIComponent(key)}=${encodeURI(params[key])}`); // encodeURI (without "Component" allows for the comma to remain after encoding)
+  return queryItems.join('&');
+}
+
+function getResults(ingredient) {
+  const endpointURL = `https://api.spoonacular.com/recipes/findByIngredients`;
+  const params = {
+    apiKey: apiKey, // assuming they're allowed to be the same name?
+    ingredients: ingredient,
+    number: 10, // an arbitrary number of my choosing. for larger numbers consider pagination of results.
+  };
+  const queryString = formatQueryString(params);
+  const requestURL = `${endpointURL}?${queryString}`;
+  // console.log(requestURL);
+
+  /* fetch(requestURL)
+    .then(
+      fetchResponse => {
+        if (fetchResponse.ok) {
+          return fetchResponse.json();
+        } // else, thrown error chains down to catch()
+      })
+    .then(
+      responseJSON => displaySearchResults(responseJSON);
+    )
+    .catch(
+      error => {
+        $('js-error-message-box').text(store.noServerResonse);
+        alert(error.message);
+      }
+    ); */
+}
+
+/* ******************************************************************************
+ * APP RENDERING 
+ * ...render says which screen to show
+ * ******************************************************************************/
 
 function render() {
   if (store.displaySearch === true) {
@@ -36,8 +94,10 @@ function render() {
   }
 }
 
-/********** EVENT HANDLERS **********/
-// >> event handlers change state <<
+/* ******************************************************************************
+ * EVENT HANDLERS 
+ * ...event handlers change state (or DOM)
+ * ******************************************************************************/
 
 function handleExportRecipe() {}
 
@@ -52,7 +112,9 @@ function handleSearchForm() {
     event.preventDefault();
     const searchTerm = $('#js-search-input').val();
 
+    console.time("time to get results"); // would this be better in the fetch?
     getResults(searchTerm);
+    console.timeEnd("time to get results");
 
     // change screen states, re-render
     store.displaySearch = false;
