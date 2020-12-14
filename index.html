@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width initial-scale=1">
 	<meta name="description" content="">
-	<title>Page Title</title>
+	<title>Recipe Finder</title>
 	<!-- CSS reset -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
 	<!-- custom styles -->
@@ -20,9 +20,9 @@
     <h1>Recipe Finder</h1>
   </header>
 	<main>
-    <section id="js-search-screen">
-      <p class="app-instruction">xyz</p>
-      <form>
+    <section id="js-search-screen" class="hidden">
+      <p class="app-use-instruction">app use instructions</p>
+      <form class="js-recipe-search-form">
         <fieldset>
           <input type="text" id="js-search-input" placeholder="Enter an ingredient...">
           <button class="btn btn-search">Search</button>
@@ -32,11 +32,25 @@
         </div>
       </form>
     </section>
-    <section id="js-results-screen"></section>
-    <section id="js-recipe-screen"></section>
+    <section id="js-results-screen" class="hidden">
+      <h2>results screen</h2>
+    </section>
+    <section id="js-recipe-screen" class="hidden">
+      <h2>recipe screen</h2>
+    </section>
   </main>
+
+  <footer class="page-footer hide-this">
+    <div>
+      <img src="images/spoonacular-logo.svg" class="spoonacular-logo" />
+      <!-- API attribution required by Spoonacular. -->
+      <span class="spoonacular-attribution">
+        <a href="https://spoonacular.com/food-api" target="_blank">Recipes fetched by Spoonacular.</a>
+      </span>
+    </div>
+  </footer>
 	
-	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="app.js">
 	</script>
 </body>

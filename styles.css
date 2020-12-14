@@ -1,0 +1,17 @@
+* {box-sizing: border-box;}
+
+.hide-this {display: none;}
+
+footer.page-footer {
+  margin-top: 4rem;
+  height: 4rem;
+  background-color: darkgrey;
+}
+
+.spoonacular-logo {
+  margin-top: 1rem;
+  height: 2rem;
+}
+
+/* .spoonacular-attribution {} */
+
