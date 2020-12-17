@@ -1,6 +1,42 @@
 * {box-sizing: border-box;}
 
+body {
+  background-color: #202020;
+  color: #bada55;
+}
+
 .hide-this {display: none;}
+
+header .food-icons {}
+
+.app-screen {}
+
+#js-search-screen {}
+
+#js-results-screen {}
+
+#js-recipe-screen {}
+
+.app-use-instruction {}
+
+.js-recipe-search-form {}
+
+#js-search-input {}
+
+.btn {}
+
+.btn-search {}
+
+#js-error-message-box {}
+
+#js-recipes-list {
+  padding-left: 0;
+}
+
+#js-recipes-list li {
+  margin-bottom: 2rem;
+  list-style: none;
+}
 
 footer.page-footer {
   margin-top: 4rem;
