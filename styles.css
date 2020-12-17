@@ -1,8 +1,9 @@
 * {box-sizing: border-box;}
 
 body {
-  background-color: #202020;
-  color: #bada55;
+  /* background-color: #202020;
+  color: #bada55; */
+  padding: 0 2rem;
 }
 
 .hide-this {display: none;}
