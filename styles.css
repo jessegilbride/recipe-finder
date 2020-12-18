@@ -1,12 +1,12 @@
 * {box-sizing: border-box;}
 
 body {
-  /* background-color: #202020;
-  color: #bada55; */
+  background-color: #202020;
+  color: #bada55;
   padding: 0 2rem;
 }
 
-.hide-this {display: none;}
+.hidden {display: none;}
 
 header .food-icons {}
 
@@ -15,8 +15,6 @@ header .food-icons {}
 #js-search-screen {}
 
 #js-results-screen {}
-
-#js-recipe-screen {}
 
 .app-use-instruction {}
 
@@ -28,7 +26,23 @@ header .food-icons {}
 
 .btn-search {}
 
-#js-error-message-box {}
+#js-error-message-box {
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+#js-back-to-search {
+  width: 200px;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #779933;
+  color: white;
+  cursor: pointer;
+}
+
+#js-back-to-search:hover {
+  background-color: dodgerblue;
+}
 
 #js-recipes-list {
   padding-left: 0;

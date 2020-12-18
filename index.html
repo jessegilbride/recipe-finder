@@ -21,25 +21,23 @@
     <div class="food-icons"></div>
     <h1>Recipe Finder</h1>
   </header>
-  <div id="js-error-message-box"></div> <!-- not the ideal spot, will figure something better in design phase -->
 	<main>
     <section id="js-search-screen" class="app-screen hidden">
-      <p class="app-use-instruction">app use instruction</p>
+      <p class="app-use-instruction">Enter an ingredient to find recipes for it.</p>
       <form class="js-recipe-search-form">
-        <input type="text" id="js-search-input" placeholder="Enter an ingredient..." required>
+        <input type="text" id="js-search-input" placeholder="Enter an ingredient...">
         <button class="btn btn-search">Search</button>
       </form>
     </section>
     <section id="js-results-screen" class="app-screen hidden">
-      <h2>results screen</h2>
-      <ol id="js-recipes-list"></ol>
+      <h2>Search Results</h2>
+      <ul id="js-recipes-list"></ul>
     </section>
-    <section id="js-recipe-screen" class="app-screen hidden">
-      <h2>recipe screen</h2>
-    </section>
+    <div id="js-error-message-box" class="hidden"></div>
+    <input type="button" id="js-back-to-search" class="hidden" value="Back to search">
   </main>
 
-  <footer class="page-footer hide-this">
+  <footer class="page-footer hidden">
     <div>
       <img src="images/spoonacular-logo.svg" class="spoonacular-logo" />
       <!-- API attribution required by Spoonacular. -->

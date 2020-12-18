@@ -3,7 +3,6 @@
 const store = {
   displaySearch: true,
   displayResults: false,
-  displayRecipe: false
 };
 
 const ruhRohShaggy = {
@@ -13,9 +12,6 @@ const ruhRohShaggy = {
 }
 
 const apiKey = `46e759e032d04fc496f2345a2a35256c`;
-
-let consoleStyleHeaderGrey = "color:black; background-color:lightgrey; padding:4px;border-radius:5px";
-let consoleStyleHeaderDarkGreen = "color:yellow; background-color:darkgreen; padding:4px;border-radius:5px";;
 
 /****************************************
   TEMPLATE GENERATION ...generate HTML
@@ -55,16 +51,12 @@ async function generateResultsList(responseJSON) {
   /* ===== DISPLAY SEARCH RESULTS TESTING ===== */
   // const recipeInformationBulkJSON = recipeInformationBulkSample; // dummy "sample" data
   /* ========================================== */
-  console.log("%c---- recipeInformationBulkJSON ----", consoleStyleHeaderGrey);
-  console.log(recipeInformationBulkJSON);
+  
+  // console.log(recipeInformationBulkJSON);
   
   // pass each recipe to list generation function
-  console.log("%c---- recipeItemsJSON ----", consoleStyleHeaderGrey);
   const recipesListString = Object.entries(recipeInformationBulkJSON)
     .map(recipeItem => generateResultsListItem(recipeItem));
-  
-  // what I expect to be returned to displaySearchResults()...
-  // console.log(recipesListString.join(''));
   
   return recipesListString.join('');
 
@@ -76,41 +68,14 @@ async function generateResultsList(responseJSON) {
 
 async function displaySearchResults(responseJSON) {
   // console.log(responseJSON);
-  //  const resultsList = /* await */ generateResultsList(responseJSON); // resultsList is a returned [PromiseResult]
+  
+  // the change in screen view happens in this function so that if there's a search error, the user stays on search screen, else then it changes here.
+  store.displaySearch = false;
+  store.displayResults = true;
+  render();
+
   await generateResultsList(responseJSON)
   .then(resultsPromise => $('#js-recipes-list').append(resultsPromise));
-
-
-  /* // this is what I expected resultsList to contain. when uncommented, you see it show in the DOM.
-  const htmlToInster = `
-  <li>
-    <img src="https://spoonacular.com/recipeImages/987595-556x370.jpg" alt="recipe image" />
-    <h3>Apple Ginger Kombucha Cocktail</h3>
-    <a href="https://www.afamilyfeast.com/apple-ginger-kombucha-cocktail/" target="_blank">View recipe</a>
-  </li>
-  <li>
-    <img src="https://spoonacular.com/recipeImages/719320-556x370.png" alt="recipe image" />
-    <h3>20 Celebration ! + $500 GIVEAWAY</h3>
-    <a href="http://www.julieseatsandtreats.com/20-celebration-recipes/" target="_blank">View recipe</a>
-  </li>
-  <li>
-    <img src="https://spoonacular.com/recipeImages/35060-556x370.jpg" alt="recipe image" />
-    <h3>Peanut Butter-stuffed Apple</h3>
-    <a href="http://www.wholeliving.com/172996/peanut-butter-stuffed-apple" target="_blank">View recipe</a>
-  </li>
-  <li>
-    <img src="https://spoonacular.com/recipeImages/65597-556x370.jpg" alt="recipe image" />
-    <h3>Cinnamon Streusel Muffins</h3>
-    <a href="http://www.myrecipes.com/recipe/cinnamon-streusel-muffins-10000001694196/" target="_blank">View recipe</a>
-  </li>
-  <li>
-    <img src="https://spoonacular.com/recipeImages/66531-556x370.jpg" alt="recipe image" />
-    <h3>Caramel Fondue</h3>
-    <a href="http://www.myrecipes.com/recipe/caramel-fondue-10000001921279/" target="_blank">View recipe</a>
-  </li>`;
-  $('#js-recipes-list').append(htmlToInster); */
-
-  // $('#js-recipes-list').append(resultsList);
  }
 
 /****************************************
@@ -121,16 +86,19 @@ async function getRecipeInformationBulk(recipeIDs) { // returns lots of useful d
   
   const endpointURL = `https://api.spoonacular.com/recipes/informationBulk`;
   const params = {
-    apiKey: apiKey, // assuming they're allowed to be the same name?
+    apiKey: apiKey,
     ids: recipeIDs,
-    includeNutrition: false // not useful, therefore set to 'false'. future app feature may include nutrition info in a widget or table using this data.
+    includeNutrition: false // not useful, therefore set to 'false'. future app feature could include nutrition info in a widget.
   };
   const queryString = formatQueryString(params);
   const requestURL = `${endpointURL}?${queryString}`;
 
-  console.log(requestURL);
+  // console.log(requestURL);
 
   const response = fetch(requestURL)
+    // .then(
+    //   firstResponse => {handleBadRequest(firstResponse)}
+    // )
     .then(
       fetchResponse => {
         if (fetchResponse.ok) {
@@ -146,8 +114,7 @@ async function getRecipeInformationBulk(recipeIDs) { // returns lots of useful d
     )
     .catch(
       error => {
-        $('#js-error-message-box').text(ruhRohShaggy.noServerResponse);
-        alert(error.message);
+        console.log("getRecipeInformationBulk() fetch error message: " + error.message);
       }
     );
 
@@ -173,45 +140,22 @@ function getResults(ingredient) {
   const params = {
     apiKey: apiKey, // assuming they're allowed to be the same name?
     ingredients: ingredient,
-    number: 5, // an arbitrary number of my choosing. for larger numbers consider pagination of results.
+    number: 3, // an arbitrary amount of my choosing, useful to limit API hits.
   };
   const queryString = formatQueryString(params);
   const requestURL = `${endpointURL}?${queryString}`;
   // console.log("request URL: " + requestURL);
-
-  function handleErrors(response) {
-    // console.log("handleErrors() called");
-    // console.log(response.status);
-    return response;
-  }
 
   /* ===== DISPLAY SEARCH RESULTS TESTING ===== */
   // displaySearchResults(recipesResponseSample); // called with sample data
   /* ========================================== */
 
   fetch(requestURL)
-    // .then(firstResponse => handleErrors(firstResponse))
     .then(
       fetchResponse => {
-        console.log("%c---- response.status ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.status);
-        console.log("%c---- response.statusText ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.statusText);
-        console.log("%c---- response.ok ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.ok);
-        console.log("%c---- response.type ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.type);
-        console.log("%c---- response.url ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.url);
-        console.log("%c---- response.headers ----", consoleStyleHeaderDarkGreen);
-        console.log(fetchResponse.headers);
         if (fetchResponse.ok) {
           // console.log(fetchResponse.status);
           return fetchResponse.json(); // get JSON from response body
-        }
-        else if (fetchResponse.status === 400) {
-          $('#js-error-message-box').text(ruhRohShaggy.ingredientNotFound);
-          return
         }
       })
     .then(
@@ -219,17 +163,14 @@ function getResults(ingredient) {
     )
     .catch(
       error => {
-        /* if (error.status === 400) {
-          $('#js-error-message-box').text(ruhRohShaggy.ingredientNotFound);
-          console.log(fetchResponse.status);
-          console.log(error.message);
-          return
-        } */
-        $('#js-error-message-box').text(ruhRohShaggy.noServerResponse);
-        // console.log(error.message);
-        console.log(error);
-        console.log("mmmk?");
-        return
+        //check if error is because network is down, then tell user
+        if (error.message === "Failed to fetch") {
+          $('#js-error-message-box').show().text("Uable to connect to the server. Check your internet connection.");
+        }
+        else if (error.message === "Cannot convert undefined or null to object") {
+          $('#js-error-message-box').show().text("Sorry, no recipes found. Try something else?");
+          $('#js-back-to-search').show();
+        }
       }
     );
 }
@@ -243,15 +184,11 @@ function render() {
   if (store.displaySearch === true) {
     $('#js-search-screen').show();
     $('#js-results-screen').hide();
-    $('#js-recipe-screen').hide();
+    $('#js-back-to-search').hide();
   } else if (store.displayResults === true) {
     $('#js-search-screen').hide();
     $('#js-results-screen').show();
-    $('#js-recipe-screen').hide();
-  } else if (store.displayRecipe === true) {
-    $('#js-search-screen').hide();
-    $('#js-results-screen').hide();
-    $('#js-recipe-screen').show();
+    $('#js-back-to-search').show();
   }
 }
 
@@ -259,22 +196,45 @@ function render() {
   EVENT HANDLERS  ...handle changes in state or DOM
 ****************************************/
 
-function handleExportRecipe() {}
+// function handleExportRecipe() {}
 
-function handleSearchResultClicked() {}
+// function handleShowNutritionWidget() {}
 
-function handleBackToResults() {}
+function handleBackToSearch() {
+  $('#js-back-to-search').on('click', function(event){
+    $('#js-recipes-list').empty();
+    $('#js-error-message-box').empty().hide();
+    $('#js-search-input').val('');
+    store.displaySearch = true;
+    store.displayResults = false;
+    render();
+  });
+}
 
-function handleBackToSearch() {}
+// handle what happens when the response status is 400. NOTE: this works from the informationBulk fetch, not findByIngredients fetch.
+/* function handleBadRequest(response) { // this function could be more generalized to check for other status codes with a switch statement.
+  console.log(response.status);
+  if (response.status === 400) {
+    $('#js-error-message-box').show().text("Sorry, no recipes found. Try something else?");
+    // change screen state in store
+    store.displaySearch = true;
+    store.displayResults = false;
+    // render
+    // render();
+  }
+  return response;
+} */
 
 function handleSearchForm() {
   $('main').on('submit', '.js-recipe-search-form', function(event) {
     event.preventDefault();
+    $('#js-error-message-box').empty();
+
     const searchTerm = $('#js-search-input').val();
     
     // extra validation (beyond native HTML validation) for blank form entry
     if (searchTerm === '') {
-      $('#js-error-message-box').text(ruhRohShaggy.ingredientNotFound);
+      $('#js-error-message-box').show().text("There was no text in the search box. Please enter an ingredient before searching.");
       return
     }
 
@@ -283,9 +243,9 @@ function handleSearchForm() {
     // console.timeEnd("time to get results");
 
     // change screen states, re-render
-    store.displaySearch = false;
-    store.displayResults = true;
-    render();
+    // store.displaySearch = false;
+    // store.displayResults = true;
+    // render();
   })
 }
 
@@ -293,9 +253,8 @@ function handleApp() {
   render();
   handleSearchForm();
   handleBackToSearch();
-  handleBackToResults();
-  handleSearchResultClicked();
-  handleExportRecipe();
+  // handleExportRecipe();
+  // handleShowNutritionWidget();
 }
 
 $(handleApp);
