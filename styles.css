@@ -27,7 +27,8 @@ font-family: 'Josefin Slab', serif;
   --medium-green: #0db300;
   --medium-green-muted: #00b24d;
   --dark-green: #005d2a;
-  --bright-blue: dodgerblue;
+  --sky-blue: #1E88E5;
+  --sky-blue-bright: dodgerblue;
   --dark-blue: #2a005d; 
   --bright-orange: #FE7309;
   --bubblegum: #F6509D;
@@ -99,14 +100,34 @@ footer {
   /* border-radius: 0; */
 }
 
-.btn-search {
+.btn {
+  border: 1px solid var(--space-cadet);
+  color: var(--red-wine);
+  border-radius: 0.25rem;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+
+.btn:hover {box-shadow: 0px 0px 2px 2px var(--bright-orange);}
+
+.btn.search {
   height: 3rem;
   margin-top: 1px; /* hack for Chrome to align button with search input */
   padding: 0 1rem;
   font-size: 24px;
-  border: 1px solid var(--space-cadet);
-  /* border-radius: 0; */
+  font-family: inherit;
+  box-shadow: none;
 }
+
+/* .btn.nutrition-info {} */
+
+.btn.recipe-link {}
 
 p.app-use-instruction {
   margin-top: 0;
@@ -117,8 +138,6 @@ p.app-use-instruction {
   margin-top: 0;
   text-align: center;
 }
-
-.btn {}
 
 .error-message-container {
   height: 6rem;
@@ -151,7 +170,7 @@ p.app-use-instruction {
 
 .result-image {
   width: 320px;
-  border-radius: 20%;
+  border-radius: 40px;
 }
 
 .spoonacular-attribution a {color: #fff}

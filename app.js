@@ -18,11 +18,13 @@ function generateResultsListItem(recipeItem) {
   const url = recipeItem[1].sourceUrl;
 
   return `
-  <li>
+  <li class="recipe-item">
     <img src="${image}" class="result-image alt="recipe image" />
     <h3>${title}</h3>
-    <a href="${url}" target="_blank">View recipe</a>
+    <a href="${url}" class="btn recipe-link" target="_blank">View recipe</a>
   </li>`;
+
+  // <a href="${}" class="btn nutrition-info">Nutrition info</a>
 }
 
 async function generateResultsList(responseJSON) {
@@ -49,6 +51,8 @@ async function generateResultsList(responseJSON) {
 
 async function displaySearchResults(responseJSON, searchedIngredients) {
   // console.log(responseJSON);
+
+  $('#js-recipes-list').empty();
 
   await generateResultsList(responseJSON)
   .then(resultsPromise => $('#js-recipes-list').append(resultsPromise));
@@ -109,7 +113,7 @@ function getResults(ingredients) {
   const params = {
     apiKey: apiKey,
     ingredients: ingredients,
-    number: 4, // an arbitrary amount, useful for limiting API hits.
+    number: 2, // an arbitrary amount, useful for limiting API hits.
   };
   const queryString = formatQueryString(params);
   const requestURL = `${endpointURL}?${queryString}`;
@@ -171,8 +175,6 @@ function handleSearchForm() {
     }
 
     $('#js-error-message-box').fadeOut('fast').delay(1000).empty();
-
-    // $('#js-recipes-list').fadeOut('fast').empty();
 
     // console.time("time to get results"); // would this be better in the fetch?
     getResults(searchTerm);
