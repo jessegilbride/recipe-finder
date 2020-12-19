@@ -12,38 +12,42 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
 	<!-- custom styles -->
 	<link href="styles.css" rel="stylesheet">
-	<!-- cloud-hosted fonts -->
-	<link href="" rel="stylesheet">
+	<!-- cloud-hosted CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 </head>
 
 <body>
+
   <header>
     <div class="food-icons"></div>
     <h1>Recipe Finder</h1>
   </header>
+  
 	<main>
-    <section id="js-search-screen" class="app-screen hidden">
-      <p class="app-use-instruction">Enter an ingredient to find recipes for it.</p>
+
+    <section class="search-box">
+      <p class="app-use-instruction">Search an ingredient to find recipes for it.</p>
       <form class="js-recipe-search-form">
         <input type="text" id="js-search-input" placeholder="Enter an ingredient...">
         <button class="btn btn-search">Search</button>
       </form>
     </section>
-    <section id="js-results-screen" class="app-screen hidden">
-      <h2>Search Results</h2>
+
+    <div class="error-message-container">
+      <div id="js-error-message-box" class="animate__animated"></div> <!-- hidden class removed -->
+    </div>
+
+    <section class="results-box hidden">
+      <h2>Search Results for "<span id="js-search-term"></span>"</h2>
       <ul id="js-recipes-list"></ul>
     </section>
-    <div id="js-error-message-box" class="hidden"></div>
-    <input type="button" id="js-back-to-search" class="hidden" value="Back to search">
+    
   </main>
 
-  <footer class="page-footer hidden">
+  <footer class="page-footer">
     <div>
-      <img src="images/spoonacular-logo.svg" class="spoonacular-logo" />
       <!-- API attribution required by Spoonacular. -->
-      <span class="spoonacular-attribution">
-        <a href="https://spoonacular.com/food-api" target="_blank">Recipes fetched by Spoonacular.</a>
-      </span>
+      <span class="spoonacular-attribution">Recipes fetched via <a href="https://spoonacular.com/" target="_blank">Spoonacular</a>.</span>
     </div>
   </footer>
 	
