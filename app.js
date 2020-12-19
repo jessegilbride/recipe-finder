@@ -109,7 +109,7 @@ function getResults(ingredients) {
   const params = {
     apiKey: apiKey,
     ingredients: ingredients,
-    number: 1, // an arbitrary amount, useful for limiting API hits.
+    number: 4, // an arbitrary amount, useful for limiting API hits.
   };
   const queryString = formatQueryString(params);
   const requestURL = `${endpointURL}?${queryString}`;
