@@ -94,6 +94,7 @@ footer {
 #js-search-input {
   width: 320px;
   height: 3rem;
+  margin-bottom: 16px;
   padding: 0.5em;
   font-size: 24px;
   border: 1px solid var(--space-cadet);
