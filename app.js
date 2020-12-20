@@ -21,10 +21,10 @@ function generateResultsListItem(recipeItem) {
   <li class="recipe-item">
     <img src="${image}" class="result-image alt="recipe image" />
     <h3>${title}</h3>
-    <a href="${url}" class="btn recipe-link" target="_blank">View recipe</a>
+    <a href="${url}" class="btn recipe-link hover-color-transition" target="_blank">View recipe</a>
   </li>`;
 
-  // <a href="${}" class="btn nutrition-info">Nutrition info</a>
+  // <a href="${}" class="btn nutrition-info hover-color-transition">Nutrition info</a>
 }
 
 async function generateResultsList(responseJSON) {
@@ -134,9 +134,11 @@ function getResults(ingredients) {
         //check if error is because network is down, then tell user
         if (error.message === "Failed to fetch") {
           $('#js-error-message-box').show().text("Uable to connect to the server. Check your internet connection.").toggleClass('animate__rubberBand');
+          
         }
         else if (error.message === "Cannot convert undefined or null to object") {
-          $('#js-error-message-box').show().text("Sorry, no recipes found. Try something else?").toggleClass('animate__rubberBand');
+          $('#js-error-message-box').fadeIn().text("Sorry, no recipes found. Try something else?").addClass('animate__rubberBand');
+          $('#js-search-term').text(ingredients);
         }
       }
     );
@@ -170,7 +172,7 @@ function handleSearchForm() {
     
     // empty search field validation
     if (searchTerm === '') {
-      $('#js-error-message-box').show().text("There was no text in the search box. Please enter an ingredient before searching.").delay(500).toggleClass('animate__rubberBand'); // removed .show()
+      $('#js-error-message-box').fadeIn().text("There was no text in the search box. Please enter an ingredient before searching.").toggleClass('animate__rubberBand');
       return
     }
 

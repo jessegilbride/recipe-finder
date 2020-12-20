@@ -41,6 +41,17 @@ font-family: 'Josefin Slab', serif;
   --french-lilac: #73628A;
   --space-cadet: #313D5A;
   --gunmetal: #183642;
+
+  /* https://coolors.co/03045e-023e8a-0077b6-0096c7-00b4d8-48cae4-90e0ef-ade8f4-caf0f8 */
+  --navy-blue: #03045eff;
+  --dark-cornflower-blue: #023e8aff;
+  --star-command-blue: #0077b6ff;
+  --blue-green: #0096c7ff;
+  --cerulean-crayola: #00b4d8ff;
+  --sky-blue-crayola: #48cae4ff;
+  --sky-blue-crayola-2: #90e0efff;
+  --blizzard-blue: #ade8f4ff;
+  --powder-blue: #caf0f8ff;
 }
 
 body {
@@ -63,6 +74,7 @@ header {
 
 header h1 {
   margin: 0.5em 0;
+  padding: 0 2rem;
   font-family: 'Allura', cursive;
   /* font-family: 'Dancing Script', cursive; */
   font-size: 92px;
@@ -91,8 +103,12 @@ footer {
   background-color: var(--platinum);
 }
 
+.js-recipe-search-form {
+  margin: 0 1rem;
+}
+
 #js-search-input {
-  width: 320px;
+  /* width: 320px; */
   height: 3rem;
   margin-bottom: 16px;
   padding: 0.5em;
@@ -101,21 +117,28 @@ footer {
   /* border-radius: 0; */
 }
 
-.btn {
+.btn { /* default button styles */
   border: 1px solid var(--space-cadet);
-  color: var(--red-wine);
-  border-radius: 0.25rem;
+  /* color: var(--red-wine); */
+  /* border-radius: 0.25rem; */
   font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.2;
   white-space: nowrap;
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 1rem;
   margin: 0.25rem;
   cursor: pointer;
+  will-change: background;
 }
 
-.btn:hover {box-shadow: 0px 0px 2px 2px var(--bright-orange);}
+.btn:hover {}
+
+.btn.hover-color-transition {
+  transition-property: background; /* should this be more specific to "background-color"? */
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
 
 .btn.search {
   height: 3rem;
@@ -123,14 +146,34 @@ footer {
   padding: 0 1rem;
   font-size: 24px;
   font-family: inherit;
-  box-shadow: none;
+  background-color: var(--sky-blue-crayola-2);
+  color: var(--navy-blue);
 }
 
-/* .btn.nutrition-info {} */
+.btn.search:hover {
+  background-color: var(--blizzard-blue);
+}
 
-.btn.recipe-link {}
+/* .btn.nutrition-info {
+  background-color: var(--space-cadet);
+  color: var(--platinum);
+}
+
+.btn.nutrition-info:hover {
+  background-color: var(--purplish);
+} */
+
+.btn.recipe-link {
+  background-color: var(--sky-blue-crayola-2);
+  color: var(--dark-cornflower-blue);
+}
+
+.btn.recipe-link:hover {
+  background-color: var(--powder-blue);
+}
 
 p.app-use-instruction {
+  padding: 0 2rem;
   margin-top: 0;
   font-size: 24px;
 }
@@ -149,7 +192,9 @@ p.app-use-instruction {
   color: var(--medium-green);
 }
 
-/* #js-error-message-box {} */
+#js-error-message-box {
+  will-change: ;
+}
 
 .button-container {
   text-align: center;
