@@ -9,9 +9,9 @@ Enter an ingredient into the search field to get recipes that use the ingredient
 
 ![app in initial state before a search](/screenshots/ScreenShot-1.jpg "App in its initial state before a search")
 
-![results shown of a search for a single ingredient](/screenshots/ScreenShot-2.jpg "A search for a single ingredient")
+![results shown of a search for a single ingredient](/screenshots/ScreenShot-2.jpeg "A search for a single ingredient")
 
-![results shown of a search for multiple ingredients](/screenshots/ScreenShot-3.jpg "A search for multiple ingredients")
+![results shown of a search for multiple ingredients](/screenshots/ScreenShot-3.jpeg "A search for multiple ingredients")
 
 ### Limitations
 * App currently set to return 4 results. This can be set to any number, but it is kept low to reduce hits to the API.
