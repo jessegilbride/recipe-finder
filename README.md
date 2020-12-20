@@ -6,12 +6,23 @@ Find recipes based on the ingredients you have.
 
 ## How It Works
 Enter an ingredient into the search field to get recipes that use the ingredient. Optionally, enter more than one ingredient and the app will try to get recipes that use as many of them as it can find. You may perform a new search at any time, just enter new search terms into the search bar at the top. Click on the link for any of the results to see its recipe (which opens in a new page).
+<br/>
+<br/>
 
 ![app in initial state before a search](/screenshots/ScreenShot-1.jpg "App in its initial state before a search")
+*App in its initial state before a search.*
+<br/>
+<br/>
 
 ![results shown of a search for a single ingredient](/screenshots/ScreenShot-2.jpeg "A search for a single ingredient")
+*A search for a single ingredient.*
+<br/>
+<br/>
 
 ![results shown of a search for multiple ingredients](/screenshots/ScreenShot-3.jpeg "A search for multiple ingredients")
+*A search for multiple ingredients.*
+<br/>
+<br/>
 
 ### Limitations
 * App currently set to return 4 results. This can be set to any number, but it is kept low to reduce hits to the API.
