@@ -23,8 +23,6 @@ function generateResultsListItem(recipeItem) {
     <h3>${title}</h3>
     <a href="${url}" class="btn recipe-link hover-color-transition" target="_blank">View recipe</a>
   </li>`;
-
-  // <a href="${}" class="btn nutrition-info hover-color-transition">Nutrition info</a>
 }
 
 async function generateResultsList(responseJSON) {
@@ -50,7 +48,6 @@ async function generateResultsList(responseJSON) {
 ****************************************/
 
 async function displaySearchResults(responseJSON, searchedIngredients) {
-  // console.log(responseJSON);
 
   $('#js-recipes-list').empty();
 
@@ -77,9 +74,6 @@ async function getRecipeInformationBulk(recipeIDs) { // returns lots of useful d
   const requestURL = `${endpointURL}?${queryString}`;
 
   const response = fetch(requestURL)
-    /* .then(
-      firstResponse => {handleBadRequest(firstResponse)}
-    ) */
     .then(
       fetchResponse => {
         if (fetchResponse.ok) {
@@ -89,7 +83,6 @@ async function getRecipeInformationBulk(recipeIDs) { // returns lots of useful d
     )
     .then(
       responseBulkInfoJSON => {
-        // console.log(responseBulkInfoJSON); // confirm data to send
         return responseBulkInfoJSON;
       }
     )
@@ -104,7 +97,7 @@ async function getRecipeInformationBulk(recipeIDs) { // returns lots of useful d
 
 function formatQueryString(params) {
   const queryItems = Object.keys(params)
-    .map(key => `${encodeURIComponent(key)}=${encodeURI(params[key])}`); // encodeURI (without "Component" allows for the comma to remain after encoding)
+    .map(key => `${encodeURIComponent(key)}=${encodeURI(params[key])}`);
   return queryItems.join('&');
 }
 
@@ -113,7 +106,7 @@ function getResults(ingredients) {
   const params = {
     apiKey: apiKey,
     ingredients: ingredients,
-    number: 2, // an arbitrary amount, useful for limiting API hits.
+    number: 4, // an arbitrary amount, useful for limiting API hits.
   };
   const queryString = formatQueryString(params);
   const requestURL = `${endpointURL}?${queryString}`;
@@ -122,7 +115,6 @@ function getResults(ingredients) {
     .then(
       fetchResponse => {
         if (fetchResponse.ok) {
-          // console.log(fetchResponse.status);
           return fetchResponse.json(); // get JSON from response body
         }
       })
@@ -131,11 +123,12 @@ function getResults(ingredients) {
     )
     .catch(
       error => {
-        //check if error is because network is down, then tell user
+        // check if error is because network is down, tell the user
         if (error.message === "Failed to fetch") {
           $('#js-error-message-box').show().text("Uable to connect to the server. Check your internet connection.").toggleClass('animate__rubberBand');
           
         }
+        // check if search term yields no results in the response, tell the user
         else if (error.message === "Cannot convert undefined or null to object") {
           $('#js-error-message-box').fadeIn().text("Sorry, no recipes found. Try something else?").addClass('animate__rubberBand');
           $('#js-search-term').text(ingredients);
@@ -145,21 +138,8 @@ function getResults(ingredients) {
 }
 
 /****************************************
-  EVENT HANDLERS
+  EVENT HANDLER(S)
 ****************************************/
-
-// function handleExportRecipe() {}
-
-// function handleShowNutritionWidget() {}
-
-// handle what happens when the response status is 400. NOTE: this works from the informationBulk fetch, not findByIngredients fetch.
-/* function handleBadRequest(response) { // this function could be more generalized to check for other status codes with a switch statement.
-  console.log(response.status);
-  if (response.status === 400) {
-    $('#js-error-message-box').show().text("Sorry, no recipes found. Try something else?");
-  }
-  return response;
-} */
 
 function handleSearchForm() {
   $('main').on('submit', '.js-recipe-search-form', function(event) {
@@ -170,7 +150,7 @@ function handleSearchForm() {
     // strip any surrounding whitespace from search term
     searchTerm = searchTerm.trim();
     
-    // empty search field validation
+    // check if search field is empty
     if (searchTerm === '') {
       $('#js-error-message-box').fadeIn().text("There was no text in the search box. Please enter an ingredient before searching.").toggleClass('animate__rubberBand');
       return
@@ -178,17 +158,8 @@ function handleSearchForm() {
 
     $('#js-error-message-box').fadeOut('fast').delay(1000).empty();
 
-    // console.time("time to get results"); // would this be better in the fetch?
     getResults(searchTerm);
-    // console.timeEnd("time to get results");
   })
 }
-
-/* function handleApp() {
-  // render();
-  // handleSearchForm();
-  // handleExportRecipe();
-  // handleShowNutritionWidget();
-} */
 
 $(handleSearchForm);

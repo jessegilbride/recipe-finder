@@ -1,54 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Amatic+SC:wght@400;700&family=Josefin+Slab:wght@300;400;500;700&display=swap');
-/* 
-font-family: 'Allura', cursive;
-  (for h1)
-  Regular 400
-
-font-family: 'Amatic SC', cursive;
-  (for other headers)
-  Regular 400
-  Bold 700
-
-font-family: 'Josefin Slab', serif;
-  (for body text)
-  Light 300
-  Regular 400
-  Medium 500
-  Bold 700
-*/
 
 * {
   box-sizing: border-box;
 }
 
 :root {
-  --light-green: #00fa71;
   --medium-green: #0db300;
-  --medium-green-muted: #00b24d;
   --dark-green: #005d2a;
-  --sky-blue: #1E88E5;
-  --sky-blue-bright: dodgerblue;
-  --dark-blue: #2a005d; 
-  --bright-orange: #FE7309;
-  --bubblegum: #F6509D;
-  --purplish: #a600b2;
   --red-wine: #5c0032;
-
-  /* https://coolors.co/eaeaea-cbc5ea-73628a-313d5a-183642 */
   --platinum: #EAEAEA;
   --lavendar-blue: #CBC5EA;
-  --french-lilac: #73628A;
-  --space-cadet: #313D5A;
   --gunmetal: #183642;
-
-  /* https://coolors.co/03045e-023e8a-0077b6-0096c7-00b4d8-48cae4-90e0ef-ade8f4-caf0f8 */
   --navy-blue: #03045eff;
   --dark-cornflower-blue: #023e8aff;
-  --star-command-blue: #0077b6ff;
-  --blue-green: #0096c7ff;
-  --cerulean-crayola: #00b4d8ff;
-  --sky-blue-crayola: #48cae4ff;
   --sky-blue-crayola-2: #90e0efff;
   --blizzard-blue: #ade8f4ff;
   --powder-blue: #caf0f8ff;
@@ -67,7 +31,6 @@ body {
 }
 
 header {
-  /* padding: 2rem 0; */
   background-color: var(--gunmetal);
   text-align: center;
 }
@@ -76,7 +39,6 @@ header h1 {
   margin: 0.5em 0;
   padding: 0 2rem;
   font-family: 'Allura', cursive;
-  /* font-family: 'Dancing Script', cursive; */
   font-size: 92px;
   letter-spacing: 1px;
   color: var(--lavendar-blue);
@@ -108,19 +70,15 @@ footer {
 }
 
 #js-search-input {
-  /* width: 320px; */
   height: 3rem;
   margin-bottom: 16px;
   padding: 0.5em;
   font-size: 24px;
   border: 1px solid var(--space-cadet);
-  /* border-radius: 0; */
 }
 
 .btn { /* default button styles */
   border: 1px solid var(--space-cadet);
-  /* color: var(--red-wine); */
-  /* border-radius: 0.25rem; */
   font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.2;
@@ -154,15 +112,6 @@ footer {
   background-color: var(--blizzard-blue);
 }
 
-/* .btn.nutrition-info {
-  background-color: var(--space-cadet);
-  color: var(--platinum);
-}
-
-.btn.nutrition-info:hover {
-  background-color: var(--purplish);
-} */
-
 .btn.recipe-link {
   background-color: var(--sky-blue-crayola-2);
   color: var(--dark-cornflower-blue);
@@ -185,7 +134,6 @@ p.app-use-instruction {
 
 .error-message-container {
   height: 6rem;
-  /* margin-bottom: 2rem; */
   padding: 2rem 0;
   text-align: center;
   font-size: 20px;
