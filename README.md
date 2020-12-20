@@ -2,7 +2,7 @@
 Find recipes based on the ingredients you have.
 
 ## Demo
-[Recipe Finder App (Demo)](https://jessegilbride.github.io/recipe-finder/) (Please note limitations, listed below)
+[Recipe Finder App](https://jessegilbride.github.io/recipe-finder/) (Please note limitations, listed below)
 
 ## How It Works
 Enter an ingredient into the search field to get recipes that use the ingredient. Optionally, enter more than one ingredient and the app will try to get recipes that use as many of them as it can find. You may perform a new search at any time, just enter new search terms into the search bar at the top. Click on the link for any of the results to see its recipe (which opens in a new page).
